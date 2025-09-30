@@ -1,23 +1,23 @@
 {
-    "name": "mansoor/filament-unsplash-picker",
-    "description": "This is my package filament-unsplash-picker",
+    "name": "rasasak/filament-pexels-picker",
+    "description": "This is my package filament-pexels-picker",
     "keywords": [
-        "mansoor",
+        "rasasak",
         "laravel",
-        "filament-unsplash-picker",
-        "unsplash",
+        "filament-pexels-picker",
+        "pexels",
         "filament",
         "image picker"
     ],
-    "homepage": "https://github.com/mansoor/filament-unsplash-picker",
+    "homepage": "https://github.com/rasasak/filament-pexels-picker",
     "support": {
-        "issues": "https://github.com/mansoor/filament-unsplash-picker/issues",
-        "source": "https://github.com/mansoor/filament-unsplash-picker"
+        "issues": "https://github.com/rasasak/filament-pexels-picker/issues",
+        "source": "https://github.com/rasasak/filament-pexels-picker"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Mansoor Ahmed",
+            "name": "Rasasak",
             "role": "Developer"
         }
     ],
@@ -38,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mansoor\\UnsplashPicker\\": "src/"
+            "Rasasak\\PexelshPicker\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mansoor\\UnsplashPicker\\Tests\\": "tests/"
+            "Rasasak\\PexelshPicker\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Mansoor\\UnsplashPicker\\UnsplashPickerServiceProvider"
+                "Rasasak\\PexelshPicker\\PexelshPickerServiceProvider"
             ],
             "aliases": {
-                "UnsplashPicker": "Mansoor\\UnsplashPicker\\Facades\\UnsplashPicker"
+                "UnsplashPicker": "Rasasak\\PexelshPicker\\Facades\\PexelsPicker"
             }
         }
     },
