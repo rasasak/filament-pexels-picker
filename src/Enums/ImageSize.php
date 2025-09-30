@@ -1,6 +1,6 @@
 <?php
 
-namespace Mansoor\UnsplashPicker\Enums;
+namespace Rasasak\PexelsPicker\Enums;
 
 enum ImageSize
 {
