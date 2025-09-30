@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'label' => 'Pick from Unsplash',
+    'label' => 'Pick from Pexels',
     'description' => 'You may select 1 photo.|You may select :numberOfSelectableImages photos.',
     'form' => [
         'fields' => [
