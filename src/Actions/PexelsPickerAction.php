@@ -94,6 +94,7 @@ class PexelsPickerAction extends Action
 
     public function uploadImage(array $data, Component $livewire)
     {
+
         foreach ($data['selectedImages'] ?? [] as $image) {
             $downloadLink = Arr::get($image, $this->getImageSize()->getPath());
 
