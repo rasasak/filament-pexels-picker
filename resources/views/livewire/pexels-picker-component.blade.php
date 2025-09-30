@@ -79,7 +79,7 @@
                                 'aspect-square' => $this->shouldUseSquareDisplay,
                                 'pointer-events-none w-full object-cover',
                             ])
-                            src="{{ $item['urls']['thumb'] }}"
+                            src="{{ $item['src']['medium'] }}"
                         >
                         <button
                             @click.stop="toggleImageSelect(@js($item))"
@@ -95,11 +95,11 @@
 
                             <div class="group-hover:flex hidden w-full justify-center bg-primary-500 opacity-90">
                                 <a
-                                    href="{{ $item['user']['links']['html'] }}"
+                                    href="{{ $item['photographer_url'] }}"
                                     target="_blank"
                                     class="text-sm text-white font-medium underline"
                                 >
-                                    {{ str($item['user']['name'])->limit(20) }}
+                                    {{ str($item['photographer'])->limit(20) }}
                                 </a>
                             </div>
                         </button>
