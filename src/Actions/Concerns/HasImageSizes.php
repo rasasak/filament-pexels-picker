@@ -1,8 +1,8 @@
 <?php
 
-namespace Mansoor\UnsplashPicker\Actions\Concerns;
+namespace Rasasak\PexelsPicker\Actions\Concerns;
 
-use Mansoor\UnsplashPicker\Enums\ImageSize;
+use Rasasak\PexelsPicker\Enums\ImageSize;
 
 trait HasImageSizes
 {
