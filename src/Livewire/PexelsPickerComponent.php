@@ -1,6 +1,6 @@
 <?php
 
-namespace Mansoor\UnsplashPicker\Livewire;
+namespace Rasasak\PexelsPicker\Livewire;
 
 use Exception;
 use Filament\Actions\Action;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class UnsplashPickerComponent extends Component implements HasActions, HasForms
+class PexelsPickerComponent extends Component implements HasActions, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
@@ -50,7 +50,7 @@ class UnsplashPickerComponent extends Component implements HasActions, HasForms
                         ->autofocus()
                         ->grow()
                         ->afterStateUpdated(fn () => $this->page = 1)
-                        ->placeholder(__('unsplash-picker::unsplash-picker-action.form.fields.search.placeholder'))
+                        ->placeholder(__('pexels-picker::pexels-picker-action.form.fields.search.placeholder'))
                         ->extraAlpineAttributes([
                             'x-model' => 'search',
                             // 'x-on:keydown.enter' => 'if (!["TEXTAREA", "TRIX-EDITOR"].includes($event.target.tagName)) {
@@ -59,7 +59,7 @@ class UnsplashPickerComponent extends Component implements HasActions, HasForms
                         ]),
 
                     Toggle::make('useSquareDisplay')
-                        ->label(__('unsplash-picker::unsplash-picker-action.form.fields.square_mode.label'))
+                        ->label(__('pexels-picker::pexels-picker-action.form.fields.square_mode.label'))
                         ->default(fn () => $this->shouldUseSquareDisplay())
                         ->reactive()
                         ->grow(false),
@@ -74,11 +74,13 @@ class UnsplashPickerComponent extends Component implements HasActions, HasForms
             return [];
         }
 
-        $response = Http::get('https://api.unsplash.com/search/photos', [
+        $response = Http::withHeaders([
+                'Authorization' => config('services.pexels.key'),
+                'X-Second' => 'bar'
+            ])->get('https://api.pexels.com/v1/search', [
             'query' => $this->search,
             'per_page' => $this->getPerPage(),
             'page' => $this->page,
-            'client_id' => config('services.unsplash.client_id'),
         ]);
 
         throw_if($response->failed(), new Exception(Arr::get($response->json(), 'errors.0')));
@@ -95,7 +97,7 @@ class UnsplashPickerComponent extends Component implements HasActions, HasForms
         return Action::make('nextPage')
             ->button()
             ->color('gray')
-            ->label(__('unsplash-picker::unsplash-picker-action.actions.next_page.label'))
+            ->label(__('pexels-picker::pexels-picker-action.actions.next_page.label'))
             ->disabled(fn () => $this->totalPages <= 1 || $this->page === $this->totalPages)
             ->action(function () {
                 $this->nextPage();
@@ -107,7 +109,7 @@ class UnsplashPickerComponent extends Component implements HasActions, HasForms
         return Action::make('previousPage')
             ->button()
             ->color('gray')
-            ->label(__('unsplash-picker::unsplash-picker-action.actions.previous_page.label'))
+            ->label(__('pexels-picker::pexels-picker-action.actions.previous_page.label'))
             ->disabled(fn () => $this->totalPages <= 1 || $this->page === 1)
             ->action(function () {
                 $this->previousPage();
@@ -143,6 +145,6 @@ class UnsplashPickerComponent extends Component implements HasActions, HasForms
 
     public function render()
     {
-        return view('unsplash-picker::livewire.unsplash-picker-component');
+        return view('pexels-picker::livewire.pexels-picker-component');
     }
 }
