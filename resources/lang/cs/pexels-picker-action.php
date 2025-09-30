@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'label' => 'Pick from Pexels',
-    'description' => 'You may select 1 photo.|You may select :numberOfSelectableImages photos.',
+    'label' => 'Vybrat z Pexels',
+    'description' => 'Můžete vybrat 1 fotku.|Můžete vybrat :numberOfSelectableImages fotek.',
     'form' => [
         'fields' => [
             'search' => [
-                'placeholder' => 'Search photos...',
+                'placeholder' => 'Vyhledat fotky...',
             ],
             'square_mode' => [
                 'label' => 'Square Mode',
@@ -15,10 +15,10 @@ return [
     ],
     'actions' => [
         'next_page' => [
-            'label' => 'Next',
+            'label' => 'Další',
         ],
         'previous_page' => [
-            'label' => 'Previous',
+            'label' => 'Předchozí',
         ],
     ],
     'no_search_results' => "Sorry, your search didn't return any results.<br>Please try a different search.",
