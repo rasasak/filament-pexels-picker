@@ -1,20 +1,20 @@
 <?php
 
-namespace Mansoor\UnsplashPicker;
+namespace Rasasak\PexelsPicker;
 
 use BladeUI\Icons\Factory;
 use Filament\Forms\Components\BaseFileUpload;
 use Livewire\Livewire;
-use Mansoor\UnsplashPicker\Actions\UnsplashPickerAction;
-use Mansoor\UnsplashPicker\Livewire\UnsplashPickerComponent;
+use Rasasak\PexelsPicker\Actions\PexelsPickerAction;
+use Rasasak\PexelsPicker\Livewire\PexelsPickerComponent;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class UnsplashPickerServiceProvider extends PackageServiceProvider
+class PexelsPickerServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'unsplash-picker';
+    public static string $name = 'pexels-picker';
 
-    public static string $viewNamespace = 'unsplash-picker';
+    public static string $viewNamespace = 'pexels-picker';
 
     public function configurePackage(Package $package): void
     {
@@ -37,9 +37,9 @@ class UnsplashPickerServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         BaseFileUpload::configureUsing(function (BaseFileUpload $component) {
-            $component->extraAlpineAttributes(UnsplashPickerAction::getExtraAlpineAttributes(...));
+            $component->extraAlpineAttributes(PexelsPickerAction::getExtraAlpineAttributes(...));
         });
 
-        Livewire::component('unsplash-picker-component', UnsplashPickerComponent::class);
+        Livewire::component('pexels-picker-component', PexelsPickerComponent::class);
     }
 }
