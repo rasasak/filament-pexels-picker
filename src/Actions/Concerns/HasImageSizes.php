@@ -6,25 +6,32 @@ use Rasasak\PexelsPicker\Enums\ImageSize;
 
 trait HasImageSizes
 {
-    protected ImageSize $imageSize = ImageSize::Regular;
+    protected ImageSize $imageSize = ImageSize::Large;
 
-    public function raw(): static
+    public function original(): static
     {
-        $this->imageSize = ImageSize::Raw;
+        $this->imageSize = ImageSize::Original;
 
         return $this;
     }
 
-    public function full(): static
+    public function large2x(): static
     {
-        $this->imageSize = ImageSize::Full;
+        $this->imageSize = ImageSize::Large2x;
 
         return $this;
     }
 
-    public function regular(): static
+    public function large(): static
     {
-        $this->imageSize = ImageSize::Regular;
+        $this->imageSize = ImageSize::Large;
+
+        return $this;
+    }
+
+    public function medium(): static
+    {
+        $this->imageSize = ImageSize::Medium;
 
         return $this;
     }
@@ -36,9 +43,23 @@ trait HasImageSizes
         return $this;
     }
 
-    public function thumbnail(): static
+    public function portrait(): static
     {
-        $this->imageSize = ImageSize::Thumbnail;
+        $this->imageSize = ImageSize::Portrait;
+
+        return $this;
+    }
+
+    public function landscape(): static
+    {
+        $this->imageSize = ImageSize::Landscape;
+
+        return $this;
+    }
+
+    public function tiny(): static
+    {
+        $this->imageSize = ImageSize::Tiny;
 
         return $this;
     }
