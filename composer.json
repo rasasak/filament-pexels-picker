@@ -38,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Rasasak\\PexelshPicker\\": "src/"
+            "Rasasak\\PexelsPicker\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rasasak\\PexelshPicker\\Tests\\": "tests/"
+            "Rasasak\\PexelsPicker\\Tests\\": "tests/"
         }
     },
     "scripts": {
