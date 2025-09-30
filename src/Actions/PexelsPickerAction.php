@@ -1,6 +1,6 @@
 <?php
 
-namespace Mansoor\UnsplashPicker\Actions;
+namespace Rasasak\PexelsPicker\Actions;
 
 use Closure;
 use Exception;
@@ -14,12 +14,12 @@ use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\FileUploadConfiguration;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Mansoor\UnsplashPicker\Actions\Concerns\HasImageSizes;
-use Mansoor\UnsplashPicker\Actions\Concerns\HasUploadLifecycleHooks;
-use Mansoor\UnsplashPicker\Forms\Components\UnsplashPickerField;
-use Mansoor\UnsplashPicker\Livewire\UnsplashPickerComponent;
+use Rasasak\PexelsPicker\Actions\Concerns\HasImageSizes;
+use Rasasak\PexelsPicker\Actions\Concerns\HasUploadLifecycleHooks;
+use Rasasak\PexelsPicker\Forms\Components\PexelsPickerField;
+use Rasasak\PexelsPicker\Livewire\PexelsPickerComponent;
 
-class UnsplashPickerAction extends Action
+class PexelsPickerAction extends Action
 {
     use HasImageSizes;
     use HasUploadLifecycleHooks;
@@ -32,14 +32,14 @@ class UnsplashPickerAction extends Action
 
     public static function getDefaultName(): ?string
     {
-        return 'unsplash_picker_action';
+        return 'pexels_picker_action';
     }
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->label(__('unsplash-picker::unsplash-picker-action.label'));
+        $this->label(__('pexels-picker::pexels-picker-action.label'));
 
         $this->icon('up-unsplash');
 
@@ -61,7 +61,7 @@ class UnsplashPickerAction extends Action
             $numberOfSelectableImages = $component->getMaxFiles() - count($component->getState());
 
             return trans_choice(
-                'unsplash-picker::unsplash-picker-action.description',
+                'pexels-picker::pexels-picker-action.description',
                 $numberOfSelectableImages,
                 ['numberOfSelectableImages' => $numberOfSelectableImages]
             );
@@ -69,7 +69,7 @@ class UnsplashPickerAction extends Action
 
         $this->form(function (FileUpload $component, Get $get) {
             return [
-                Livewire::make(UnsplashPickerComponent::class, [
+                Livewire::make(PexelsPickerComponent::class, [
                     'search' => $this->getDefaultSearch(),
                     'perPage' => $this->getPerPage(),
                     'useSquareDisplay' => $this->shouldUseSquareDisplay(),
@@ -77,9 +77,9 @@ class UnsplashPickerAction extends Action
                     'numberOfSelectableImages' => $component->isMultiple()
                         ? $component->getMaxFiles() - count($component->getState())
                         : 1,
-                ])->key($component->getKey() . 'actions.form.unplash_picker'),
+                ])->key($component->getKey() . 'actions.form.pexels_picker'),
 
-                UnsplashPickerField::make('selectedImages'),
+                PexelsPickerField::make('selectedImages'),
             ];
         });
 
