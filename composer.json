@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rasasak\\PexelshPicker\\PexelshPickerServiceProvider"
+                "Rasasak\\PexelsPicker\\PexelsPickerServiceProvider"
             ],
             "aliases": {
-                "UnsplashPicker": "Rasasak\\PexelshPicker\\Facades\\PexelsPicker"
+                "UnsplashPicker": "Rasasak\\PexelsPicker\\Facades\\PexelsPicker"
             }
         }
     },
