@@ -1,6 +1,6 @@
 <?php
 
-namespace Mansoor\UnsplashPicker\Actions\Concerns;
+namespace Rasasak\PexelsPicker\Actions\Concerns;
 
 use Closure;
 
