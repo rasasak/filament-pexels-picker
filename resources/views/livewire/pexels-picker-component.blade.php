@@ -38,7 +38,7 @@
 
         $watch('search', value => searching = value != '')
 
-        $watch('selectedImages', value => $wire.dispatch('unsplash-selected-images-updated', value))
+        $watch('selectedImages', value => $wire.dispatch('pexels-selected-images-updated', value))
     "
     :class="{ 'pointer-events-none': isProcessing }"
     @click.prevent="if (isProcessing) return"
@@ -110,7 +110,7 @@
             @if (blank($this->getImages))
                 <div x-show="! searching && search != ''" class="text-center" >
                     <p>
-                        {!! __('unsplash-picker::unsplash-picker-action.no_search_results') !!}
+                        {!! __('pexels-picker::pexels-picker-action.no_search_results') !!}
                     </p>
                 </div>
             @endif
