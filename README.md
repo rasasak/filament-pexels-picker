@@ -2,7 +2,7 @@
 
 Pexels gallery for Filament. Search and pick any image from Pexels.com, specify which size to use.
 
-Forked from mansoor/filament-unsplash-picker
+Forked from [mansoorkhan96/filament-unsplash-picker](https://github.com/mansoorkhan96/filament-unsplash-picker)
 
 ## Installation
 
