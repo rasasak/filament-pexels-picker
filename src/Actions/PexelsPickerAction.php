@@ -30,6 +30,8 @@ class PexelsPickerAction extends Action
 
     protected string | Closure $search = '';
 
+    public string $language = "en-US";
+
     public static function getDefaultName(): ?string
     {
         return 'pexels_picker_action';
@@ -71,6 +73,7 @@ class PexelsPickerAction extends Action
             return [
                 Livewire::make(PexelsPickerComponent::class, [
                     'search' => $this->getDefaultSearch(),
+                    'language' => $this->getLanguage(),
                     'perPage' => $this->getPerPage(),
                     'useSquareDisplay' => $this->shouldUseSquareDisplay(),
                     'isMultiple' => $component->isMultiple(),
@@ -173,6 +176,18 @@ class PexelsPickerAction extends Action
     public function getPerPage(): ?int
     {
         return $this->perPage;
+    }
+
+    public function language(string $language): static
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    public function getLanguage(): string
+    {
+        return $this->language;
     }
 
     public function useSquareDisplay(bool $useSquareDisplay): static
