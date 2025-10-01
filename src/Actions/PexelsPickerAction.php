@@ -41,7 +41,7 @@ class PexelsPickerAction extends Action
 
         $this->label(__('pexels-picker::pexels-picker-action.label'));
 
-        $this->icon('up-unsplash');
+        $this->icon('up-pexels');
 
         $this->disabled(function (FileUpload $component) {
             if ($component->isMultiple()) {
