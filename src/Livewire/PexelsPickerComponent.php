@@ -7,6 +7,7 @@ use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -36,7 +37,11 @@ class PexelsPickerComponent extends Component implements HasActions, HasForms
 
     public ?int $totalPages = null;
 
+    public ?int $totalResults = null;
+
     public bool $searching = false;
+
+    public string $language;
 
     public function form(Schema $schema): Schema
     {
@@ -44,7 +49,7 @@ class PexelsPickerComponent extends Component implements HasActions, HasForms
             ->components([
                 Flex::make([
                     TextInput::make('search')
-                        ->live(debounce: 300)
+                        //->live(debounce: 300)
                         ->hiddenLabel()
                         ->autocomplete(false)
                         ->autofocus()
@@ -58,11 +63,43 @@ class PexelsPickerComponent extends Component implements HasActions, HasForms
                             // }',
                         ]),
 
+                    Select::make('language')
+                        ->hiddenLabel()
+                        ->selectablePlaceholder(false)
+                        ->options([
+                            'cs-CZ' => 'CZ',
+                            'en-US' => 'EN',
+                        ])
+                        ->grow(false)
+                        ->extraAlpineAttributes([
+                            'x-model' => 'language',
+                        ]),
+
+                    Select::make('perPage')
+                        ->hiddenLabel()
+                        ->selectablePlaceholder(false)
+                        ->options([
+                            '20' => '20',
+                            '25' => '25',
+                            '50' => '50',
+                        ])
+                        ->grow(false)
+                        ->extraAlpineAttributes([
+                            'x-model' => 'perPage',
+                        ]),
+
                     Toggle::make('useSquareDisplay')
                         ->label(__('pexels-picker::pexels-picker-action.form.fields.square_mode.label'))
                         ->default(fn () => $this->shouldUseSquareDisplay())
                         ->reactive()
                         ->grow(false),
+
+                    Action::make('doSearch')
+                        ->label('Hledat')
+                        ->action(fn () => $this->searching = true)
+                        ->keyBindings(['enter'])
+
+
                 ])->extraAttributes(['class' => 'items-center']),
             ]);
     }
@@ -81,15 +118,17 @@ class PexelsPickerComponent extends Component implements HasActions, HasForms
             'query' => $this->search,
             'per_page' => $this->getPerPage(),
             'page' => $this->page,
+            'locale' => $this->language
+
         ]);
 
         throw_if($response->failed(), new Exception(Arr::get($response->json(), 'errors.0')));
 
-        $this->totalPages = Arr::get($response->json(), 'total_pages');
-
+        $this->totalResults = Arr::get($response->json(), 'total_results');
+        $this->totalPages = ceil($this->totalResults / $this->perPage);
         $this->searching = false;
 
-        return Arr::get($response->json(), 'results');
+        return Arr::get($response->json(), 'photos');
     }
 
     public function nextPageAction(): Action
