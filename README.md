@@ -1,13 +1,8 @@
-# Unsplash Picker for Filament
+# Pexels Picker for Filament
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mansoor/filament-unsplash-picker.svg?style=flat-square)](https://packagist.org/packages/mansoor/filament-unsplash-picker)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mansoor/filament-unsplash-picker/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mansoor/filament-unsplash-picker/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mansoor/filament-unsplash-picker/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mansoor/filament-unsplash-picker/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/mansoor/filament-unsplash-picker.svg?style=flat-square)](https://packagist.org/packages/mansoor/filament-unsplash-picker)
+Pexels gallery for Filament. Search and pick any image from Pexels.com, specify which size to use.
 
-Unsplash gallery for Filament. Search and pick any image from Unsplash.com, specify which size to use.
-
-![](./resources/screenshot.png)
+Forked from mansoor/filament-unsplash-picker
 
 ## Installation
 
@@ -17,11 +12,11 @@ You can install the plugin via composer:
 composer require mansoor/filament-unsplash-picker
 ```
 
-Add Unsplash Client ID to `config/services.php`
+Add Pexels API key to `config/services.php`
 
 ```php
-'unsplash' => [
-    'client_id' => env('UNSPLASH_CLIENT_ID'),
+'pexels' => [
+    'key' => env('PEXELS_API_KEY'),
 ],
 ```
 
@@ -31,22 +26,22 @@ Add Unsplash Client ID to `config/services.php`
 After setting up a custom theme add the plugin's views to your theme css file.
 
 ```css
-@source '../../../../vendor/mansoor/filament-unsplash-picker/resources/**/*.blade.php';
+@source '../../../../vendor/rasasak/pexels-unsplash-picker/resources/**/*.blade.php';
 ```
 
 Add plugin views to your theme css file is the only change you need to upgrade to 4.x.
 
 ## Usage
 
-Just add the `UnsplashPickerAction` to your FileUpload Field's action.
+Just add the `PexelsPickerAction` to your FileUpload Field's action.
 
 ```php
-use Mansoor\UnsplashPicker\Actions\UnsplashPickerAction;
+use Rasasak\PexelsPicker\Actions\PexelsPickerAction;
 
 Forms\Components\FileUpload::make('featured_image')
     ->image()
     ->hintAction(
-        UnsplashPickerAction::make()
+        PexelsPickerAction::make()
     )
 ```
 
@@ -56,7 +51,7 @@ This plugin also supports all the features for [Spatie Media Libaray Plugin](htt
 SpatieMediaLibraryFileUpload::make('featured_image')
     ->image()
     ->hintAction(
-        UnsplashPickerAction::make()
+        PexelsPickerAction::make()
     )
 ```
 
@@ -65,17 +60,20 @@ SpatieMediaLibraryFileUpload::make('featured_image')
 You can specify which image size to use.
 
 ```php
-UnsplashPickerAction::make()
+PexelsPickerAction::make()
     ->regular()
 ```
 
 **Available sizes:**
 
--   `->raw()`
--   `->full()`
--   `->regular()`
+-   `->original()`
+-   `->large2x()`
+-   `->large()`
+-   `->medium()`
 -   `->small()`
--   `->thumbnail()`
+-   `->landscape()`
+-   `->portrait()`
+-   `->tiny()`
 
 ## Choose multiple photos
 
@@ -85,7 +83,7 @@ If you add `->multiple()` to your FileUpload field, the plugin will allow you to
 FileUpload::make('featured_image')
     ->multiple() // This will indicate the plugin to allow the user to pick multiple files
     ->hintAction(
-        UnsplashPickerAction::make()
+        PexelsPickerAction::make()
     )
 ```
 
@@ -94,7 +92,7 @@ FileUpload::make('featured_image')
 You may specify how many photos to show per page by appending `->perPage()` method.
 
 ```php
-UnsplashPickerAction::make()
+PexelsPickerAction::make()
     ->perPage(20)
 ```
 
@@ -103,7 +101,7 @@ UnsplashPickerAction::make()
 You can choose to dispaly images in square which uses `aspect-square` class from Tailwind CSS or disable it to display images in original height.
 
 ```php
-UnsplashPickerAction::make()
+PexelsPickerAction::make()
     ->useSquareDisplay(false)
 ```
 
@@ -112,14 +110,14 @@ UnsplashPickerAction::make()
 You may set the default search input.
 
 ```php
-UnsplashPickerAction::make()
+PexelsPickerAction::make()
     ->defaultSearch('Hello world')
 ```
 
 You can also pass a custom closure to get search input from a field and return the search string.
 
 ```php
-UnsplashPickerAction::make()
+PexelsPickerAction::make()
     ->defaultSearch(fn (Get $get) => $get('title'))
 ```
 
@@ -128,7 +126,7 @@ UnsplashPickerAction::make()
 Similar to core Filament, Unsplash picker provides two hooks `beforeUpload` and `afterUpload` to let you use Unsplash data.
 
 ```php
-UnsplashPickerAction::make()
+PexelsPickerAction::make()
     ->afterUpload(function (array $data) {
         dd($data);
     })
@@ -136,36 +134,27 @@ UnsplashPickerAction::make()
 
 ## Customization
 
-The `UnsplashPickerAction` is simple Filament Form Action and you may override all the available methods. The Image picker component is a Livewire component, which is easy to extend.
+The `PexelsPickerAction` is simple Filament Form Action and you may override all the available methods. The Image picker component is a Livewire component, which is easy to extend.
 
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="filament-unsplash-picker-views"
+php artisan vendor:publish --tag="filament-pexels-picker-views"
 ```
 
 > [!IMPORTANT]
-> When defining the `extraAlpineAttributes` method for `SpatieMediaLibraryFileUpload` or `FileUpload` field, make sure to merge the Alpine attributes from `UnsplashPickerAction`.
+> When defining the `extraAlpineAttributes` method for `SpatieMediaLibraryFileUpload` or `FileUpload` field, make sure to merge the Alpine attributes from `PexelsPickerAction`.
 
 ```php
 SpatieMediaLibraryFileUpload::make('media')
     ->extraAlpineAttributes(function ($component) {
         return [
             'custom-attribute' => 'custom-attribute-value-goes-here',
-            ...UnsplashPickerAction::getExtraAlpineAttributes($component),
+            ...PexelsPickerAction::getExtraAlpineAttributes($component),
         ];
     })
 ```
 
-## Upgrade to 1.x
-
-This plugin is re-written but it is very small and simple, so upgrade is very easy. If you follow the docs from top to bottom, you should be good to use the latest version.
-
--   This plugin no longer ships with config file. Hence per_page, use_square_display are no longer supported. You may use `Action::configureUsing()` in service provider to achieve the same. You may also delete the config file
--   `unsplash_client_id` has been removed to from plugin config file. You may add it to `config/services.php`. Please check Installation section.
--   Latest version of plugin requires to add a custom theme. Please check Installation section.
--   The need for using queueable job to clear/delete un-used media is now removed. So you may use any queue connection desired.
--   The language file has been renamed and the structure has changed very much.
 
 ## Testing
 
