@@ -36,7 +36,7 @@
             isProcessing = true
         })
 
-        $watch('search', value => searching = value != '')
+        {{-- $watch('search', value => searching = value != '') --}}
 
         $watch('selectedImages', value => $wire.dispatch('pexels-selected-images-updated', value))
     "
@@ -51,7 +51,7 @@
     </div>
 
     <div :class="{ 'opacity-50': isProcessing }">
-        <div class="mb-4">
+        <div class="mb-4 ">
             {{ $this->form }}
         </div>
 
@@ -118,6 +118,7 @@
             @if (count($this->getImages) > 0)
                 <div x-show="! searching && search != ''" class="mt-6 flex justify-between">
                     {{ $this->previousPageAction }}
+                    <div>{{  $this->page  }} / {{  $this->totalPages  }}</div>
                     {{ $this->nextPageAction }}
                 </div>
             @endif
