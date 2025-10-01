@@ -1,6 +1,6 @@
 <?php
 
-namespace Mansoor\UnsplashPicker\Tests;
+namespace Rasasak\PexelsPicker\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -14,7 +14,7 @@ use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
-use Mansoor\UnsplashPicker\UnsplashPickerServiceProvider;
+use Rasasak\PexelsPicker\PexelsPickerServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
@@ -25,7 +25,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Mansoor\\UnsplashPicker\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Rasasak\\PexelsPicker\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
